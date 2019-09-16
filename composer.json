@@ -1,0 +1,59 @@
+{
+    "name": "metadeck/blog",
+    "description": "Blog",
+    "keywords": [
+        "metadeck",
+        "blog"
+    ],
+    "homepage": "https://github.com/metadeck/blog",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Declan McDonough",
+            "email": "declan@metadeck.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "illuminate/support": "^6.0",
+        "spatie/laravel-medialibrary": "^7.12",
+        "spatie/laravel-tags": "^2.5"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "provide": {
+        "ext-imagick": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Metadeck\\Blog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Metadeck\\Blog\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Metadeck\\Blog\\BlogServiceProvider"
+            ],
+            "aliases": {
+                "Blog": "Metadeck\\Blog\\BlogFacade"
+            }
+        }
+    }
+}
