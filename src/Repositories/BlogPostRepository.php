@@ -5,19 +5,24 @@ use Metadeck\Blog\Models\BlogPost;
 
 class BlogPostRepository extends BlogBaseRepository
 {
+    /**
+     * Inject the model
+     *
+     * BlogPostRepository constructor.
+     * @param BlogPost $post
+     */
     function __construct(BlogPost $post)
     {
         $this->model = $post;
     }
 
-    public function findBySlug($slug)
-    {
-        return $this->model
-            ->where('slug', $slug)
-            ->firstOrFail();
-    }
-
-    public function latestPosts($count)
+    /**
+     * Get the latest posts from the blog
+     *
+     * @param $count
+     * @return mixed
+     */
+    public function latest($count)
     {
         return $this->model
             ->where('scheduled_for', '<', Carbon::now())

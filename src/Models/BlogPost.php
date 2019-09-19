@@ -5,14 +5,18 @@ namespace Metadeck\Blog\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Metadeck\EloquentSchemaOrg\HasSchemaOrgData\HasSchemaOrgDataTrait;
+use Metadeck\EloquentSchemaOrg\HasSchemaOrgData\HasSchemaOrgData;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Spatie\SchemaOrg\Schema;
 use Spatie\Tags\HasTags;
+use Metadeck\EloquentSchemaOrg;
 
-class BlogPost extends Model implements HasMedia
+class BlogPost extends Model implements HasMedia, HasSchemaOrgData
 {
-    use HasTags, HasMediaTrait, SoftDeletes;
+    use HasTags, HasMediaTrait, SoftDeletes, HasSchemaOrgDataTrait;
 
     /**
      * Fillable properties.
@@ -102,4 +106,25 @@ class BlogPost extends Model implements HasMedia
         $this->addMediaConversion('index')->width(300)->height(300);
     }
 
+    /**
+     * Return the json-ld representation of the model
+     *
+     * @return mixed
+     */
+    public function toJsonLd()
+    {
+        return json_encode(
+            Schema::blogPosting()
+                ->author(
+                    Schema::person()
+                        ->name($this->author->name)
+                        ->url(env('APP_URL'))
+                )
+                ->sourceOrganization(
+                    Schema::organization()
+                        ->name('Metadeck')
+                        ->url(env('APP_URL'))
+                )
+        );
+    }
 }
