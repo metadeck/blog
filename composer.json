@@ -22,18 +22,12 @@
         "illuminate/support": "^6.0",
         "spatie/laravel-medialibrary": "^7.12",
         "spatie/laravel-tags": "^2.5",
-        "metadeck/eloquent-schema-org": "dev-master"
+        "metadeck/eloquent-schema-org": "^1.0"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
         "phpunit/phpunit": "^8.0"
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../eloquent-schema-org"
-        }
-    ],
     "provide": {
         "ext-imagick": "*"
     },
