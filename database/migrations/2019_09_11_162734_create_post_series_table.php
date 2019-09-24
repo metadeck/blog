@@ -22,10 +22,10 @@ class CreatePostSeriesTable extends Migration
         });
 
         Schema::create('blog_post_series_post', function (Blueprint $table) {
-            $table->unsignedBigInteger('post_series_id');
-            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('blog_post_series_id');
+            $table->unsignedBigInteger('blog_post_id');
             $table->integer('order');
-            $table->unique(['post_series_id', 'post_id']);
+            $table->unique(['blog_post_series_id', 'blog_post_id']);
         });
     }
 
